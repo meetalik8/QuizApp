@@ -1,0 +1,80 @@
+body::before {
+  content: "Sem 6 MPR!";
+  display: block;
+  text-align: center;
+  color: white;
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  background-repeat: no-repeat;
+}
+
+.quiz-container {
+  width: 80%;
+  max-width: 600px;
+  background-color: rgba(229, 157, 157, 0.9);
+  padding: 20px;
+  margin-left: 21px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.score-section {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px;
+  text-align: center;
+}
+
+.question-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.option-button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  color: #000000;
+  width: 100%;
+}
+
+.correct {
+  background-color: #4caf50;
+}
+
+.incorrect {
+  background-color: #ff5252;
+}
+
+@media screen and (max-width: 768px) {
+  .quiz-container {
+    width: 73%;
+    
+  }
+  body::before {
+    font-size:.1px;
+    margin-left:10px;
+
+  }
+}
