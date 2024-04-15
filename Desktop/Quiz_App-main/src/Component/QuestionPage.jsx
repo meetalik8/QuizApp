@@ -50,6 +50,21 @@ const QuestionPage = ({ level, handleQuizComplete }) => {
     }
   };
 
+  const handleSkipClick = () => {
+    if (!selectedOption) {
+      setSelectedOption("skip");
+
+      setTimeout(() => {
+        if (currentQuestion < 11) {
+          setSelectedOption(null);
+          setCurrentQuestion(currentQuestion + 1);
+        } else {
+          handleQuizComplete(score);
+        }
+      }, 1000);
+    }
+  };
+
   if (shuffledQuizData.length === 0) {
     return <div>Loading questions...</div>;
   }
@@ -76,6 +91,9 @@ const QuestionPage = ({ level, handleQuizComplete }) => {
               </button>
             ))}
           </div>
+          <button className="skip-button" onClick={handleSkipClick}>
+            Skip
+          </button>
         </div>
       </div>
     </>

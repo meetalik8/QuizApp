@@ -1,11 +1,12 @@
 // Quiz.js
 import React, { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Routes, Route, Navigate } from "react-router-dom";
+import GreetingPage from "./GreetingPage";
 import NameInput from "./NameInput";
 import LevelSelection from "./LevelSelection";
 import QuestionPage from "./QuestionPage";
 import QuizResult from "./QuizResult";
-import { Route, Routes } from "react-router-dom";
+
 
 const Quiz = () => {
   const [name, setName] = useState("");
@@ -14,6 +15,10 @@ const Quiz = () => {
   const [levelSelected, setLevelSelected] = useState(false);
   const [score, setScore] = useState(0);
   const navigate = useNavigate();
+
+  const navigateToQuiz = () => {
+    navigate("/quiz");
+  };
 
   const handleStartQuiz = (enteredName) => {
     setName(enteredName);
@@ -35,31 +40,45 @@ const Quiz = () => {
   return (
     <div className="quiz-container">
       <Routes>
-
-          <Route path="/" element={<NameInput handleStartQuiz={handleStartQuiz} />} />
-          <>
-            <Route
-              path="/select-level"
-              element={<LevelSelection handleLevelSelect={handleLevelSelect} name={name} />}
-            />
-            {levelSelected ? (
-              <Route
-                path="/questions"
-                element={
-                  <QuestionPage
-                    level={level}
-                    handleQuizComplete={handleQuizComplete}
-                  />
-                }
+        <Route
+          path="/"
+          element={<GreetingPage navigateToQuiz={navigateToQuiz} />}
+        />
+        <Route
+          path="/quiz"
+          element={<NameInput handleStartQuiz={handleStartQuiz} />}
+        />
+        <>
+          <Route
+            path="/select-level"
+            element={
+              <LevelSelection
+                handleLevelSelect={handleLevelSelect}
+                name={name}
               />
-            ) : (
-              <Route path="/questions" element={<Navigate to="/select-level" />} />
-            )}
+            }
+          />
+          {levelSelected ? (
             <Route
-              path="/result"
-              element={<QuizResult score={score} name={name} quizData={[]} />}
-            /> 
-          </>
+              path="/questions"
+              element={
+                <QuestionPage
+                  level={level}
+                  handleQuizComplete={handleQuizComplete}
+                />
+              }
+            />
+          ) : (
+            <Route
+              path="/questions"
+              element={<Navigate to="/select-level" />}
+            />
+          )}
+          <Route
+            path="/result"
+            element={<QuizResult score={score} name={name} quizData={[]} />}
+          />
+        </>
       </Routes>
     </div>
   );
